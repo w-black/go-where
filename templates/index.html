@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" >
+    <title>Billy's Robo Recommendations</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+  </head>
+  <body>  
+    <h1 id="title">GO HERE?</h1>
+
+    <!-- Form to search for start location -->
+    <form method="POST" class="search-form">
+      <input type="text" class = "search-box" id="text" name="start_loc" placeholder="Start location"><br><br>
+      <input type="text" class = "search-box" id="text" name="loc_description" placeholder="Description"><br><br>
+      <input type="submit" class = "search-button" id='myButton' value="Get recommendations" style="font-family: 'Courier New', Courier, monospace;" onclick="showLoading()";>
+    </form>
+
+    <script>
+      function showLoading() {
+        showLoadingMessage("Loading...")
+        const myTimeout = setTimeout(showLoadingMessage.bind(null, "Getting destinations..."), 4000)
+        const myTimeout2 = setTimeout(showLoadingMessage.bind(null, "Almost there..."), 8000)
+      }
+      function showLoadingMessage(message) {
+        var button= document.getElementById('myButton');
+        button.value = message
+      }
+    </script>
+
+    
+    
+    {% if prompt_html %}
+      <!-- Initial descriptive line -->
+      <div id="recommendation_list">
+        {% if user_input_start_location and user_input_description %}
+        <p style="font-size:16px">Ok, I've made a list of destinations to visit from {{user_input_start_location}} that can be described as "{{ user_input_description }}":</p>
+        {% elif user_input_start_location %}
+        <p style="font-size:16px">Ok, I've made a list of destinations to visit from {{user_input_start_location}}:</p>
+        {% elif user_input_description %}
+        <p style="font-size:16px">Ok, I've made a list of destinations to visit that match can be described as "{{ user_input_description }}":</p>
+        {% else %}
+        <p style="font-size:16px">No idea huh? I've made a list of destinations to visit for you:</p>
+        {% endif %}
+        <!-- Display destinations as bullet points -->
+        <ol>
+          {% for destination in prompt_html %}
+          <li><span class="bold">{{ destination.split("-")[0] }}</span> - {{ destination.split("-")[1:] | join("-") }}</li>
+          {% endfor %}
+        </ol>
+      </div>
+    {% endif %}
+    
+    
+    <!-- Google Map container -->
+    <div id="map"></div>
+    
+    <script>
+      function initMap() {
+        // Parse location data from Flask template
+        const locs = JSON.parse('{{ locations | tojson }}'.replace(/&quot;/g, '"'));
+        
+        // Create map object and center on first location
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 100,
+          center: { lat: locs[0].lat, lng: locs[0].lng },
+        });
+        
+        // Fit the map to the bounds of all locations
+        const bounds = new google.maps.LatLngBounds();
+        locs.forEach((loc, index) => {
+          const marker = new google.maps.Marker({
+            position: loc,
+            label: (index + 1).toString(),
+            map: map,
+          });
+          bounds.extend(marker.getPosition());
+        });
+        map.fitBounds(bounds);
+      }
+    </script>
+    
+    <!-- Load the Google Maps JavaScript API -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key={{ maps_api_key }}&callback=initMap"
+      async
+      defer
+    ></script>
+  </body>
+</html>

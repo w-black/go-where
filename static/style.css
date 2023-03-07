@@ -1,0 +1,95 @@
+html, body {
+        min-height: fit-content;
+        padding: 20px;
+        overflow: auto;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        background-color: rgb(48, 48, 48);
+}
+
+#title {
+        font-family: 'Courier New', Courier, monospace; 
+        font-size: 75px;
+}
+
+/* Search box formatting */
+.search-form {
+        width: 410px;
+        border-radius: 14px;
+        box-sizing:border-box;
+        padding:12px;
+        align-items: center;
+        justify-items: center;
+        background-color: rgb(36, 36, 36);
+        box-shadow: 0px 10px 20px rgb(60, 60, 60), 0 0 0 20px rgb(48, 48, 48);
+}
+
+.search-box {
+        border-radius: 8px;
+        width: 380px;
+        height: 30px;
+        outline: none;
+        font-family: 'Courier New', Courier, monospace;
+        border-top-style: hidden;
+        border-right-style: hidden;
+        border-left-style: hidden;
+        border-bottom-style: hidden;
+        background-color: #ececec;
+        box-shadow: 0 5px 5px rgb(39, 39, 39), 0 0 0 10px rgb(33, 33, 33);
+}
+
+.search-button {
+        border-radius: 8px;
+        width: 383px;
+        height: 30px;
+        outline: none;
+        font-size: 18px;
+        font-weight: 120;
+        font-family: 'Courier New', Courier, monospace;
+        border-top-style: hidden;
+        border-right-style: hidden;
+        border-left-style: hidden;
+        border-bottom-style: hidden;
+        background-color: #ececec;
+        box-shadow: 0 5px 5px rgb(39, 39, 39), 0 0 0 10px rgb(33, 33, 33);
+}
+
+input[type="text"] {
+    font-size:18px;
+}
+
+/* Styles for the recommendations */
+#recommendation_list {
+      padding: 20px;
+      width: 75%;
+      max-width: 1000px;
+      font-family: 'Courier New', Courier, monospace;
+}
+
+#recommendation_list li {
+        width: 100%;
+        margin-bottom: 10px;
+}
+
+#recommendation_list p {
+        font-size: 50;
+}
+
+#recommendation_list ol li::marker {
+        color: rgb(204, 43, 43);
+        font-weight: bold;
+}
+
+.bold {
+        color: rgb(204, 43, 43);
+        font-weight: bold;
+}
+
+/* Define map height and width */
+#map {
+        height: 500px;
+        width: 75%;
+        border-radius: 12px;
+}
