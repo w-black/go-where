@@ -1,25 +1,23 @@
 {
     "version": 2,
-    "builds": [
-      {
-        "src": "app.py",
-        "use": "@vercel/python"
-      }
-    ],
     "routes": [
       {
         "src": "/static/(.*)",
         "dest": "/static/$1"
       },
       {
-        "src": ".*",
+        "src": "/(.*)",
         "dest": "/app.py"
       }
     ],
-    "functions": {
-        "api/**/*.py": {
-          "runtime": "python3.9",
-          "timeout": 30
+    "builds": [
+        {
+          "src": "app.py",
+          "use": "@vercel/python"
         }
-    }
+      ],
+      "env": {
+        "FLASK_APP": "app.py",
+        "FLASK_ENV": "production"
+      }
 }
