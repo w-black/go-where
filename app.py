@@ -13,7 +13,7 @@ gmaps = googlemaps.Client(key=os.environ.get('google_maps_key'))
 
 
 # Set up Flask app
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 # Define route for home page
 @app.route("/", methods=["GET", "POST"])
