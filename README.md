@@ -1,5 +1,5 @@
 
-# go-where
+# Go Where
 
 GPT-powered travel recommendation app. 
 
