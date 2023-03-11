@@ -11,13 +11,14 @@
 
     <!-- Form to search for start location -->
     <form method="POST" class="search-form">
-      <input type="text" class = "search-box" id="text" name="start_loc" placeholder="Start location"><br><br>
-      <input type="text" class = "search-box" id="text" name="loc_description" placeholder="Description"><br><br>
+      <input type="text" class = "search-box" id="text" name="start_loc" placeholder=" Start location"><br><br>
+      <input type="text" class = "search-box" id="text" name="loc_description" placeholder=" Description"><br><br>
       <input type="submit" class = "search-button" id='myButton' value="Get recommendations" style="font-family: 'Courier New', Courier, monospace;" onclick="showLoading()";>
     </form>
 
     <script>
       function showLoading() {
+        var button= document.getElementById('myButton').style.backgroundColor = '#999';
         showLoadingMessage("Loading...")
         const myTimeout = setTimeout(showLoadingMessage.bind(null, "Getting destinations..."), 4000)
         const myTimeout2 = setTimeout(showLoadingMessage.bind(null, "Almost there..."), 8000)
@@ -45,7 +46,9 @@
         <!-- Display destinations as bullet points -->
         <ol>
           {% for destination in prompt_html %}
-          <li><span class="bold">{{ destination.split("-")[0] }}</span> - {{ destination.split("-")[1:] | join("-") }}</li>
+          <li><span class="bold">
+            <a href="https://www.google.com/search?q={{ destination.split('-')[0] }}" target="_blank">{{ destination.split("-")[0][:-1] }}</a></span> - {{ destination.split("-")[1:] | join("-") }}
+          </li>
           {% endfor %}
         </ol>
       </div>
