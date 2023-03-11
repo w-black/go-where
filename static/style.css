@@ -53,7 +53,15 @@ html, body {
         border-left-style: hidden;
         border-bottom-style: hidden;
         background-color: #ececec;
+        cursor:pointer;
         box-shadow: 0 5px 5px rgb(39, 39, 39), 0 0 0 10px rgb(33, 33, 33);
+}
+
+
+.search-button:hover {
+        background: rgb(68, 68, 68);
+        color: #ececec;
+        font-weight: bold;
 }
 
 input[type="text"] {
@@ -92,4 +100,25 @@ input[type="text"] {
         height: 500px;
         width: 75%;
         border-radius: 12px;
+}
+
+
+/* unvisited link */
+a:link {
+        color: rgb(204, 43, 43);
+}
+      
+/* visited link */
+a:visited {
+        color: rgb(204, 43, 43);
+}
+      
+/* mouse over link */
+a:hover {
+        color: rgb(253, 253, 253);
+}
+      
+/* selected link */
+a:active {
+        color: rgb(254, 134, 134);
 }
