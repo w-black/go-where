@@ -27,10 +27,7 @@ def home():
         user_input_start_location = request.form["start_loc"]
         user_input_description = request.form["loc_description"]
 
-        # Make API request to OpenAI to generate completion
-        response = openai.Completion.create(
-            engine=model_engine,
-            prompt=f"You are powering a travel recommendations app which prioritises diversified recommendations of places people should visit. \
+        prompt=f"You are powering a travel recommendations app which prioritises diversified recommendations of places people should visit. \
                 List 5 destinations to travel to from {user_input_start_location} that match the description: {user_input_description}. \
                 Provide the country they are in and a short description of each one explaining why it fits the required description, along with some sights to visit in the location. \
                 The descriptions you provide should not repeat any phrases or sentence structures, and should not start with the destination name. \
@@ -41,8 +38,13 @@ def home():
                     ... \
                     4: {{\"name\": \"destination first name 5\", \"country\": \"country of destination 5\", \"description\": \"description of destination 5\"}}, \
                 }} \
-                Any apostrophes should have a backlash in front of them.",
-            max_tokens=500,
+                Any apostrophes should have a backlash in front of them."
+
+        # Make API request to OpenAI to generate completion
+        response = openai.Completion.create(
+            model=model_engine,
+            prompt=prompt,
+            max_tokens=1000,
             n=1,
             stop=None,
             temperature=0.5,
