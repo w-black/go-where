@@ -51,7 +51,6 @@ def home():
         )
         # Extract response text from API response
         prompt_dict = eval(response.choices[0].text)
-        print(prompt_dict)
         # Render home page with formatted bullet point list
         prompt_html = [f"{prompt_dict[i]['name']}, {prompt_dict[i]['country']} - {prompt_dict[i]['description']}" for i in range(len(prompt_dict))]
 
